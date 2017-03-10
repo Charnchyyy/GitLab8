@@ -1,34 +1,12 @@
 from turtle import *
-class Pole():
-    def __init__(self):
-
-        self.xPos = 0
-        self.yPos = 0
-
-    def showPole(self):
-        pu()
-        goto(self.xPos,self.yPos)
-        setheading(0)
-        pd()
-        for i in range(2):
-            fd(20)
-            left(90)
-            fd(100)
-            left(90)
-            
-        
-
-p = Pole()
-p.showPole()
-
-class disk:
-    def __init__(self,name,x,y,height,width,color):
+class Disk(Turtle):
+    def __init__(self,name,x,y,height,width):
         self.name = name
         self.x = x
         self.y = y
-        self.height = height
-        self.width = width
-        self.color = color
+        self.height = 20
+        self.width = 100
+        self.color = "blue"
     def showdisk(self):
         goto(self.x,self.y)
         begin_fill()
@@ -64,6 +42,45 @@ class disk:
         fd(self.width/2)
         end_fill()
 
+class Pole(Turtle):
+    def __init__(self,name,xPos,yPos):
+
+        self.name = name
+        self.stack = []
+        self.top = 0
+        self.xPos = xPos
+        self.yPos = yPos
+        self.thick = 20
+        self.length = 100
+        self.color = "red"
+
+    def showpole(self):
+        pu()
+        goto(self.xPos,self.yPos)
+        setheading(0)
+        pd()
+        begin_fill()
+        color(str(self.color))
+        for i in range(2):
+            fd(self.thick)
+            left(90)
+            fd(self.length)
+            left(90)
+        end_fill()
+
+    def pushdisk(self,disk):
+        self.stack.append(disk)
+        disk.newpos(self.xPos,self.yPos)
+        
+
+    def popdisk(self):
+        pass
+        
+        
+        
+
+
+        
 class Hanoi(object):
     def __init__(self,n = 3,start = 'A',workspace = 'B',destination = 'C'):
         self.startp = Pole(start,0,0)
@@ -89,5 +106,5 @@ class Hanoi(object):
 h = Hanoi()
 h.solve()
         
-        
-        
+    
+
