@@ -1,12 +1,12 @@
 from turtle import *
-class disk:
-    def __init__(self,name,x,y,height,width,color):
+class Disk(Turtle):
+    def __init__(self,name,x,y,height,width):
         self.name = name
         self.x = x
         self.y = y
-        self.height = height
-        self.width = width
-        self.color = color
+        self.height = 20
+        self.width = 100
+        self.color = "blue"
     def showdisk(self):
         goto(self.x,self.y)
         begin_fill()
@@ -41,20 +41,20 @@ class disk:
         lt(90)
         fd(self.width/2)
         end_fill()
-class Pole(disk):
-    def __init__(self,name,stack,top=0,xPos,yPos,thick,length,color):
+
+class Pole(Turtle):
+    def __init__(self,name,xPos,yPos):
 
         self.name = name
-        self.stack = stack
-        self.top = top
+        self.stack = []
+        self.top = 0
         self.xPos = xPos
         self.yPos = yPos
-        self.thick = thick
-        self.length = length
-        self.color = color
-        
+        self.thick = 20
+        self.length = 100
+        self.color = "red"
 
-    def showPole(self):
+    def showpole(self):
         pu()
         goto(self.xPos,self.yPos)
         setheading(0)
@@ -69,8 +69,42 @@ class Pole(disk):
         end_fill()
 
     def pushdisk(self,disk):
+        self.stack.append(disk)
+        disk.newpos(self.xPos,self.yPos)
+        
+
+    def popdisk(self):
+        pass
+        
+        
+        
+
+
+        
+class Hanoi(object):
+    def __init__(self,n = 3,start = 'A',workspace = 'B',destination = 'C'):
+        self.startp = Pole(start,0,0)
+        self.workspacep = Pole(workspace,150,0)
+        self.destinationp = Pole(destination,300,0)
+        self.startp.showpole()
+        self.workspacep.showpole()
+        self.destinationp.showpole()
+        for i in range(n):
+            self.startp.pushdisk(Disk,("d"+str(i),0,i*150,20,(n-1)*30))
+    def move_disk(self,start,destination):
+        disk = start.popdisk()
+        destination.pushdisk(disk)
+    def move_tower(self,n,s,d,w):
+        if n == 1:
+            self.mvoe_disk(s,d)
+        else:
+            self.move_tower(n-1,s,w,d)
+            self.move_disk(s,d)
+            self.move_tower(n-1,w,d,s)
+    def solve(self):
+        self.move_tower(3,self.starto,self.destinationp,self.workspacep)
+h = Hanoi()
+h.solve()
         
     
-        
-p = Pole()
-p.showPole()
+
