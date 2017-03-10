@@ -1,3 +1,7 @@
+import sys
+from PySide.QtCore import *
+from PySide.QtGui import *
+
 
 import sys
 from PySide.QtCore import *
@@ -34,11 +38,13 @@ class Simple_drawing_window3(Simple_drawing_window):
     def __init__(self):
         Simple_drawing_window.__init__(self)
         
+
     def paintEvent(self, e):
         p = QPainter()
         p.begin(self)
 
         p.setPen(QColor(0,0,0))
+
         p.setBrush(QColor(0,127,10))
         p.drawPolygon([
             QPoint( 70, 100), QPoint(100, 110),
@@ -57,12 +63,31 @@ class Simple_drawing_window3(Simple_drawing_window):
         p.end()
 
 
+class Simple_drawing_window1(Simple_drawing_window):
+    def __init__(self):
+        Simple_drawing_window.__init__(self)  
+    
+    def paintEvent(self, e):
+        p = QPainter()
+        p.begin(self)
+        p.setPen(QColor(0,0,0))
+        p.setBrush(QColor(50,127,10))
+        p.drawPolygon([
+            QPoint( 570, 100), QPoint(500, 110),
+            QPoint(630, 100), QPoint(500, 250),
+            ])
+        p.end()
+        
 def main():
           app = QApplication(sys.argv)
-
-          w = Simple_drawing_window3()
-          w.show()
+          w1  = Simple_drawing_window1() 
+          w3 = Simple_drawing_window3()
+          w1.show()
+          w3.show()
           return app.exec_()
 
 if __name__=="__main__":
     sys.exit(main())
+
+      
+
