@@ -1,7 +1,7 @@
 import sys
 from PySide.QtCore import *
 from PySide.QtGui import *
-
+'''
 class Simple_drawing_window(QWidget):
     def __init__(self):
         QWidget.__init__(self,None)
@@ -114,6 +114,8 @@ def main():
 
 if __name__=="__main__":
     sys.exit(main())
+
+'''
 
       
 
