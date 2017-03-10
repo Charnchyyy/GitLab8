@@ -1,3 +1,7 @@
+import sys
+from PySide.QtCore import *
+from PySide.QtGui import *
+
 
 class Simple_drawing_window(QWidget):
     def __init__(self):
@@ -6,7 +10,7 @@ class Simple_drawing_window(QWidget):
         self.rabbit = QImage("images/rabbit.png")
 
     def paintEvent(self, e):
-        p = Qpainter()
+        p = QPainter()
         p.begin(self)
 
         p.setPen(QColor(0,0,0))
@@ -27,3 +31,30 @@ class Simple_drawing_window(QWidget):
         p.drawImage(QRect(200,100,320,320),self.rabbit)
         p.end()
         
+
+class Simple_drawing_window1(Simple_drawing_window):
+    def __init__(self):
+        Simple_drawing_window.__init__(self)
+
+    def paintEvent(self, e):
+        p = QPainter()
+        p.begin(self)
+
+        p.setPen(QColor(0,0,0))
+        p.setBrush(QColor(50,127,10))
+        p.drawPolygon([
+            QPoint( 570, 100), QPoint(500, 110),
+            QPoint(630, 100), QPoint(500, 250),
+            ])
+        p.end()
+
+        
+def main():
+    app = QApplication(sys.argv)
+
+    w = Simple_drawing_window1()
+    w.show()
+
+    return app.exec_()
+
+main()
